@@ -17,8 +17,9 @@ class CreateKursusesTable extends Migration
             $table->id();
             $table->foreignId('category_id');
             $table->string('cover')->nullable();
-            $table->string('judul');
             $table->text('description');
+            $table->string('judul');
+            $table->bigInteger( 'harga' )->number_format();
             $table->timestamps();
         });
     }

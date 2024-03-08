@@ -56,21 +56,25 @@ class DatabaseSeeder extends Seeder
         Kursus::create([
             'judul'=>'Java prog',
             'description'=>'tutorial java for beginer',
+            'harga' => '150000',
             'category_id'=>1
         ]);
         Kursus::create([
             'judul'=>'Algoritma prog',
             'description'=>'How to understand algoritm',
+            'harga' => '150000',
             'category_id'=>1
         ]);
         Kursus::create([
             'judul'=>'Fluter ',
             'description'=>'tutorial flutter for beginer',
+            'harga' => '150000',
             'category_id'=>2
         ]);
         Kursus::create([
             'judul'=>'Figma ',
             'description'=>'tutorial Figma for beginer',
+            'harga' => '150000',
             'category_id'=>3
         ]);
     }

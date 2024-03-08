@@ -266,8 +266,9 @@
                                         style="width: 15rem; height: 20rem; background-image: url('{{ asset('/cover_image/' . $row->cover) }}');">
                                     </div>
                                     <div class="card card-detail1" style="width: 15rem; height: 20rem;">
-                                        <h5 class="card-title">{{ $row->judul }}</h5>
+                                        <h5 class="card-title ">{{ $row->judul }}</h5>
                                         <p class="card-text">{{ $row->description }}</p>
+                                        <h5 class="card-title">{{ $row->harga }}</h5>
                                         <div class="card-button">
                                             <div class="row">
                                                 <div class="col-7">

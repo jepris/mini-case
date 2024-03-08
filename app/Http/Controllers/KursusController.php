@@ -51,6 +51,7 @@ class KursusController extends Controller
         $data->judul = $request->judul;
         $data->category_id = $request->category_id;
         $data->description = $request->description;
+        $data->harga = $request->harga;
         if ( $request->hasFile( 'cover' ) ) {
             $file = $request->file( 'cover' );
             $name = 'cover-'.date('ymdhis'). '.' . $file->getClientOriginalExtension();
@@ -106,6 +107,7 @@ class KursusController extends Controller
         $kursus->judul = $request->judul;
         $kursus->category_id = $request->category_id;
         $kursus->description = $request->description;
+        $kursus->harga = $request->harga;
         if ( $request->hasFile( 'cover' ) ) {
             $file = $request->file( 'cover' );
             $name = 'cover-'.date('ymdhis'). '.' . $file->getClientOriginalExtension();

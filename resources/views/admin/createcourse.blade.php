@@ -52,6 +52,11 @@
                         <input type="textarea" name="description" class="form-control" id="exampleInputPassword1"
                             placeholder="Masukkan Penjelasan Singkat Kursus">
                     </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Price</label>
+                        <input type="number" name="price" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Masukkan Harga Kursus">
+                    </div>
                     <button type="submit" class="btn btn-success">Submit</button>
                 </form>
             </div>

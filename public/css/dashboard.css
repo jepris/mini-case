@@ -9,7 +9,7 @@
     margin-right: 30px;
     font-weight: bold;
     justify-content: center;
-}
+}card-text
 
 .card-body p{
     color: white;
@@ -313,6 +313,7 @@
 
 .card-text{
     color: black !important;
+    margin-bottom: -100px;
 }
 
 .judulkelas{

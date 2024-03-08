@@ -47,6 +47,7 @@ class AdminController extends Controller
         $data->judul = $request->judul;
         $data->category_id = $request->category_id;
         $data->description = $request->description;
+        $data->harga = $request->harga;
         if ( $request->hasFile( 'cover' ) ) {
             $file = $request->file( 'cover' );
             $name = 'cover-'.date('ymdhis'). '.' . $file->getClientOriginalExtension();

@@ -85,6 +85,7 @@
                             <div class="card-body">
                                 <h5 class="card-title judulcourse d-flex justify-content-center">{{ $kursus->judul }}</h5>
                                 <p class="card-text descript d-flex justify-content-center ">{{$kursus->description}}</p>
+                                <h5 class="card-title judulcourse d-flex justify-content-center">{{ $kursus->harga }}</h5>
                                 <div class="row">
                                     <div class="col d-flex justify-content-center">
                                         <a href="{{ url("/kursus/{$kursus->id}/users") }}" class="btn btn-secondary">View User</a>

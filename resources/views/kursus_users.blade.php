@@ -46,7 +46,7 @@
                     </li>
                     @can('admin')
                         <li class="nav-item">
-                            <a class="nav-link" href="/tambahdata">Add List Course </a>
+                            <a class="nav-link" href="/dashboard/kursus">Add List Course </a>
                         </li>
                     @endcan
                 </ul>

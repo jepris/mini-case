@@ -41,15 +41,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/course">Master class</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">How its work</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
                     @can('admin')
                         <li class="nav-item">
                             <a class="nav-link" href="/dashboard/kursus">manage List Course </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard/kursus">manage List student </a>
                         </li>
                     @endcan
                 </ul>
@@ -91,6 +88,7 @@
                         <th class="col">Cover</th>
                         <th class="col">Kursus Name</th>
                         <th class="col">Description</th>
+                        <th class="col">Price</th>
                         <th class="col">Action</th>
                     </tr>
                 </thead>
@@ -98,9 +96,10 @@
                     @foreach($kursus as $data)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td><img src="{{ asset('/cover_image/' . $data->cover) }}" class="card-img-top" alt="null!"></td>
+                        <td><img src="{{ asset('/cover_image/' . $data->cover) }}" class="card-img-top" alt="{{ $data->judul. ".png" }}"></td>
                         <td>{{ $data->judul }}</td>
                         <td>{{ $data->description }}</td>
+                        <td>Rp. {{ $data->harga }}</td>
                         <td>
                             <a href="/dashboard/kursus/{{ $data->id }}" class="badge bg-info"><span data-feather="eye"></span></a>
                             <a href="/dashboard/kursus/{{ $data->id }}/edit" class="badge bg-warning"><span data-feather="edit"></span></a>
