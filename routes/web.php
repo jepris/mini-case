@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KursusController;
@@ -40,3 +41,8 @@ Route::post('/kursus/{kursus}/exitkursus', [UserController::class, 'exitkursus']
 
 // Route::resource('dashboard/kursus',AdminController::class)->except('show')->middleware('admin');
 Route::resource('dashboard/kursus',AdminController::class)->except('show'); 
+// Route::resource('dashboard/user',AdminUserController::class)->except('show'); 
+// Route::resource('dashboard/user',AdminUserController::class)->except('show'); 
+Route::get('/dashboard/user', [AdminUserController::class,'index'])->name('index');
+// Route::get('/dashboard/{user}/edit', [AdminUserController::class,'edit'])->name('admin.edit');
+Route::put('/dashboard/{user}', [AdminUserController::class, 'updatestatus'])->name('admin.update');

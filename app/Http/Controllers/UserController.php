@@ -119,25 +119,26 @@ class UserController extends Controller
     //join kursus
     public function joinKursus(Request $request, $kursusId)
     {
-        $user = Auth::user();
-        // $user = Auth::user()->with('kursus')->first();
-        $kursus = Kursus::find($kursusId);
-        //logic dipakai jika nilai kursus tidak berisi null
-        // if ($user->kelas->contains($kursus)) {
-        //     $message = 'You are already a member of the "' . $kursus->nama . '" class.';
-        //     return redirect('dashboard')->with('status', $message);
-        // }
-        if ($user && $user->kursus && $user->kursus->contains($kursus)) {
-            // Pengguna sudah tergabung dengan kelas
-            $errormessage = 'You are already a member of the "' . $kursus->judul . '" course.';
-            return redirect()->back()->with('error', $errormessage);
+
+        $user = Auth::user(); // Mendapatkan pengguna yang saat ini masuk
+
+        // Periksa apakah pengguna sudah bergabung dengan kursus
+        $isJoined = $user->kursus()->where('kursus_id', $kursusId)->exists();
+
+        if (!$isJoined && $user->status==='active') {
+            // Jika belum bergabung dan status aktif, izinkan untuk bergabung
+            $kursus = Kursus::findOrFail($kursusId);
+            $user->kursus()->attach($kursus);
+
+            // return redirect()->route('kursus_users', $kursusId)->with('success', 'Anda telah berhasil bergabung dengan kursus.');
+            return redirect()->back()->with('success', 'Anda telah berhasil bergabung dengan kursus.');
+        } elseif ($isJoined) {
+            // Jika sudah bergabung, kembalikan pesan kesalahan
+            return redirect()->back()->with('error', 'Anda sudah bergabung dengan kursus ini.');
+        } else {
+            // Jika status tidak aktif, kembalikan pesan kesalahan
+            return redirect()->back()->with('error', 'Anda tidak dapat bergabung dengan kursus karena status akun Anda tidak aktif.');
         }
-        //input data ke dalam tabel pivot
-        $user->kursus()->attach($kursus);
-        // $users = $kursus->users;
-        $successMessage = 'You have joined the "' . $kursus->judul . '" course successfully.';
-        return redirect()->back()->with('success',$successMessage);
-        // return view('kursus_users', compact('kursus', 'users'))->with('success',$successMessage);
     }
     //nampilin data user course
     public function showKursusUsers($kursusId)

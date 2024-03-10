@@ -39,14 +39,14 @@
                         <a class="nav-link" href="/">Home Page</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">How its work</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="/course">Master class</a>
                     </li>
                     @can('admin')
                         <li class="nav-item">
-                            <a class="nav-link" href="/dashboard/kursus">Add List Course </a>
+                            <a class="nav-link" href="/dashboard/kursus">manage List Course </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard/kursus">manage List student </a>
                         </li>
                     @endcan
                 </ul>
@@ -76,54 +76,48 @@
             <div class="col">
                 <button onclick="goBack()" class="btn btn-danger mb-3">Back page</button>
             </div>
-            <div class="col-10 me-5">
-                <form method="POST" action="{{ route('join.kursus', ['kursusId' => $kursus->id]) }}">
-                    @csrf
-                    {{-- <button type="submit" class="btn btn-sm btn-primary">Join</button> --}}
-                    @if (Auth::check())
-                        @if (Auth::user()->Role === 'user')
-                            <button type="submit" class="btn btn-success" onclick="return confirm('Apakah kamu yakin ingin masuk ke kelas ini ?')">Join</button>
-                         @endif
-                                                
-                    @endif
-                </form>
-            </div>
         </div>
-            <h1>Users in {{ $kursus->judul }} course</h1>
-        <br><br>
-        @if ($users->count() > 0)
-            <div class="table-responsive">
-                <table class="table table-hover table-bordered border border-dark border-2">
-                    <thead class="table-warning">
-                        <tr>
-                            <th scope="col">No.</th>
-                            <th scope="col">Nama</th>
-                            <th scope="col">Jenis Kelamin</th>
-                            <th scope="col">No. telepon</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            @foreach ($users as $user)
-                                <th scope="row">{{ $loop->index + 1 }}</th>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->jeniskelamin }}</td>
-                                <td>{{ $user->notelp }}</td>
-                        </tr>
-        @endforeach
-        </tbody>
-        </table>
-    @else
-        <p>No users have joined {{ $kursus->judul }} yet.</p>
-        @endif
-        @if (auth()->user()->kursus->contains($kursus->id))
-            <form action="{{ route('exit.kursus', $kursus) }}" method="POST">
-                @csrf
-                @method('POST')
-                <button type="submit" onclick="return confirm('Apakah kamu yakin ingin keluar ke kelas ini ?')">Exit Course</button>
-            </form>
-        @endif
-    </div>
+        
+        <h1 class="h2">Manage course</h1>
+        <div class="table-responsive col-lg-8">
+            <a href="/dashboard/kursus/create" class="btn btn-primary mb-3">create new User</a>
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th class="col">No</th>
+                        <th class="col">Name</th>
+                        <th class="col">Email</th>
+                        <th class="col">No Telephone</th>
+                        <th class="col">Jenis Kelamin</th>
+                        <th class="col">Role</th>
+                        <th class="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($user as $data)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $data->name }}</td>
+                        <td>{{ $data->email }}</td>
+                        <td>{{ $data->notelp }}</td>
+                        <td>{{ $data->jeniskelamin }}</td>
+                        <td>{{ $data->role }}</td>
+                        <td>
+                            <form method="POST" action="{{ route('admin.update', $data->id) }}">
+                                @csrf
+                                @method('PUT')
+                                <select name="status">
+                                    <option value="active" {{ $data->status === 'active' ? 'selected' : '' }}>Active</option>
+                                    <option value="inactive" {{ $data->status === 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                </select>
+                                <button type="submit" class="btn btn-success">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
 
     </div>
@@ -160,6 +154,7 @@
             window.history.back();
         }
     </script>
+
 </body>
 
 </html>

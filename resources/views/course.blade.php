@@ -92,12 +92,13 @@
                                     </div>
                                     <div class="col d-flex justify-content-center"> 
                                         <form method="POST" action="{{ route('join.kursus', ['kursusId' => $kursus->id]) }}">
-                                            @csrf
-                                            @foreach ($users as $user)
-                                                @if ($user->role ==='admin')
-                                                    <button type="submit" class="btn btn-success" onclick="return confirm('Apakah kamu yakin ingin masuk ke kelas ini ?')">Join</button>
-                                                @endif
-                                            @endforeach
+                                            @csrf       
+                                                {{-- @if (Auth::user()->Role === 'admin')
+                                                <button type="submit" class="btn btn-success" onclick="return confirm('Apakah kamu yakin ingin masuk ke kelas ini ?')">Join</button>
+
+                                                @endif --}}
+                                                <button type="submit" class="btn btn-success">Join</button>
+
                                         </form>
                                     </div>
                                 </div>

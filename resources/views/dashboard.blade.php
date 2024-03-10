@@ -47,11 +47,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/about">About</a>
                     </li>
-                    @can('admin')
-                        <li class="nav-item">
-                            <a class="nav-link" href="/dashboard/kursus">manage List Course </a>
-                        </li>
-                    @endcan
+                    
 
                 </ul>
             </div>
@@ -70,7 +66,12 @@
                         <ul class="dropdown-menu">
                             <li><button class="dropdown-item" type="button"
                                     disabled>{{ auth()->user()->role }}</button></li>
+                            @can('admin')
+                            <li><a href="/dashboard/kursus" class="dropdown-item" type="button">Manage Course</a></li>
+                            <li><a href="/dashboard/user" class="dropdown-item" type="button">Manage User</a></li>
+                            @endcan
                             <li><a href="/sesi/logout" class="dropdown-item" type="button">Log Out</a></li>
+                            
                         </ul>
                     </div>
                 @else
